@@ -15,18 +15,16 @@ def is_number(x):
         return True
     except ValueError:
         return False
+
 def test_me(listy):
     # Checking to see if entire string past 1st space is valid (only numbers)
-        valid_iterable = True
-
-        for i in range (1, len(listy)-1):
-            
+        valid_numbers = True
+        for i in range (1, len(listy)):       
             if is_number(listy[i]):
                 pass
             else:
-                valid_iterable = False
-    
-        return valid_iterable
+                valid_numbers = False
+        return valid_numbers
 
 
 
@@ -39,34 +37,38 @@ while True:
     #User enters q and breaks out of while loop   
     if tokens[0] == 'q':
         break
-    #turning inputs into floats based on number of tokens
-    
-
 
     #Construct list of numbers from string input
     if test_me(tokens):
-        for i in range (1, len(tokens)-1):
-            nums.append(float(tokens[i]))
+        for i in range (1, len(tokens)):
+            num_to_add = float(tokens[i])
+            nums.append(num_to_add)
     else:
         print "Entry was not valid!"
 
-    print nums
-"""
-    #Cases to run
-    if tokens[0] == '+':
-        print add(num1, num2)
-    elif tokens[0] == '-':
-        print subtract(num1, num2)
-    elif tokens[0] == '*':
-        print multiply(num1, num2)
-    elif tokens[0] == '/':
-        print divide(num1, num2)
-    elif tokens[0] == 'square':
-        print square(num1)
-    elif tokens[0] == 'cube':
-        print cube(num1)
-    elif tokens[0] == 'pow':
-        print power(num1, num2)
-    elif tokens[0] == 'mod':
-        print mod(num1, num2)
-"""
+    #Cases to run, adding a try catch to grab too large calculations
+    try:
+        if tokens[0] == '+':
+            print "{:.2f}".format(reduce(add, nums))
+        elif tokens[0] == '-':
+            print "{:.2f}".format(reduce(subtract, nums))
+        elif tokens[0] == '*':
+            print "{:.2f}".format(reduce(multiply, nums))
+        elif tokens[0] == '/':
+            print "{:.2f}".format(reduce(divide, nums))
+        elif tokens[0] == 'square':
+            if len(nums) > 1:
+                print "You can only square one number."
+            else:
+                print square(nums[0])
+        elif tokens[0] == 'cube':
+            if len(nums) > 1:
+                print "You can only cube one number."
+            else:
+                print cube(nums[0])
+        elif tokens[0] == 'pow':
+            print "{:.2f}".format(reduce(power, nums))
+        elif tokens[0] == 'mod':
+            print "{:.2f}".format(reduce(mod, nums))
+    except OverflowError:
+        print "Your calculation was too large. TOO BAD SO SAD."
