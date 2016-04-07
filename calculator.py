@@ -9,18 +9,50 @@ from arithmetic import *
 
 # Enter into the loop of operators.  Q will break you out of the loop.
 
+def is_number(x):
+    try:
+        float(x)
+        return True
+    except ValueError:
+        return False
+def test_me(listy):
+    # Checking to see if entire string past 1st space is valid (only numbers)
+        valid_iterable = True
+
+        for i in range (1, len(listy)-1):
+            
+            if is_number(listy[i]):
+                pass
+            else:
+                valid_iterable = False
+    
+        return valid_iterable
+
+
+
 while True:
     print "Enter your operation and numbers: Ex: + 2 3 or q to quit"
     input = raw_input(">> ")
+    nums = []
+
     tokens = input.split(" ")
     #User enters q and breaks out of while loop   
     if tokens[0] == 'q':
         break
     #turning inputs into floats based on number of tokens
-    num1 = float(tokens[1])
-    if len(tokens) > 2:
-        num2 = float(tokens[2])
-    #cases to run
+    
+
+
+    #Construct list of numbers from string input
+    if test_me(tokens):
+        for i in range (1, len(tokens)-1):
+            nums.append(float(tokens[i]))
+    else:
+        print "Entry was not valid!"
+
+    print nums
+"""
+    #Cases to run
     if tokens[0] == '+':
         print add(num1, num2)
     elif tokens[0] == '-':
@@ -37,3 +69,4 @@ while True:
         print power(num1, num2)
     elif tokens[0] == 'mod':
         print mod(num1, num2)
+"""
