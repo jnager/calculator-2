@@ -9,7 +9,7 @@ from arithmetic import *
 
 # Enter into the loop of operators.  Q will break you out of the loop.
 
-def is_number(x):
+def is_float(x):
     try:
         float(x)
         return True
@@ -20,7 +20,7 @@ def test_me(listy):
     # Checking to see if entire string past 1st space is valid (only numbers)
         valid_numbers = True
         for i in range (1, len(listy)):       
-            if is_number(listy[i]):
+            if is_float(listy[i]):
                 pass
             else:
                 valid_numbers = False
@@ -45,6 +45,7 @@ while True:
             nums.append(num_to_add)
     else:
         print "Entry was not valid!"
+        continue
 
     #Cases to run, adding a try catch to grab too large calculations
     try:
